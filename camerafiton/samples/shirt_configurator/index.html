@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Shirt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="../assets/Flat-UI-master/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="../assets/Flat-UI-master/css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../assets/Flat-UI-master/images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="../assets/Flat-UI-master/js/html5shiv.js"></script>
+    <![endif]-->
+
+  <!-- Load JS here for greater good =============================-->
+  <script src="../assets/Flat-UI-master/js/jquery-1.8.3.min.js"></script>
+  <script src="../assets/Flat-UI-master/js/jquery-ui-1.10.3.custom.min.js"></script>
+  <script src="../assets/Flat-UI-master/js/jquery.ui.touch-punch.min.js"></script>
+  <script src="../assets/Flat-UI-master/js/bootstrap.min.js"></script>
+  <script src="../assets/Flat-UI-master/js/bootstrap-select.js"></script>
+  <script src="../assets/Flat-UI-master/js/bootstrap-switch.js"></script>
+  <script src="../assets/Flat-UI-master/js/flatui-checkbox.js"></script>
+  <script src="../assets/Flat-UI-master/js/flatui-radio.js"></script>
+  <script src="../assets/Flat-UI-master/js/jquery.tagsinput.js"></script>
+  <script src="../assets/Flat-UI-master/js/jquery.placeholder.js"></script>
+
+  <!-- color picker -->
+  <link rel="stylesheet" type="text/css" href="../assets/jquery.simplecolorpicker.css"/>
+  <script src="../assets/jquery.simplecolorpicker.js"></script>
+
+
+    <!-- Bootstrap -->
+  <!-- Latest compiled and minified CSS -->
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
+
+  <!-- Latest Glyphicons minified CSS -->
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+  <!-- LAGOA API -->
+  <script src="../../build/lapi.js"></script>
+	<script src="js/fabric.js"></script>
+	<script src="js/tracking.js"></script>
+	<script src="js/face-min.js"></script>
+	<script src="js/dat.gui.min.js"></script>
+	<script src="js/stats.min.js"></script>
+
+  <style media="screen">
+    body {
+      background: whitesmoke;
+    }
+
+    #patterns img{
+      width : 75px;
+      height: 75px;
+      margin: 2px;
+      border-radius: 8px;
+    }
+
+    #patterns img:hover{
+      /*width: 100px;*/
+      /*height: 100px;*/
+      outline : 4px solid #ffff00;
+      border-radius: 8px;
+    }
+
+    .fillVertical{
+      height:100%;
+    }
+    .fillVertical iframe{
+      float : right;
+      width : 650px;
+      height: 100%;
+    }
+#lagoaframe {
+  display: inline-block;
+}
+#videoElement {
+	position:absolute;
+    margin: 0px auto;
+    width: 1000px;
+	height: 1000px;
+    border: 10px #333 solid;
+	background-color: #666;
+}
+#c{
+	position:absolute;
+	position:relative;
+	margin-top: 0;
+    width: 1000px;
+	height: 1000px;
+}
+</style>
+
+
+  </head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Customizer</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h3>Pattern</h3>
+            <div id="patterns"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h3>Color</h3>
+            <select name="color-picker1">
+              <option value="#FFFFFF"></option>
+              <option value="#B1C5EA"></option>
+              <option value="#547ED9"></option>
+              <option value="#002569"></option>
+              <option value="#8EDBE5"></option>
+              <option value="#9DD6CF"></option>
+              <option value="#87887F"></option>
+              <option value="#99A3A6"></option>
+              <option value="#C1BED1"></option>
+              <option value="#333333"></option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h3>View</h3>
+            <div class="col-md-4"><a href="#" class="btn btn-block btn-lg btn-default js-orbit">Orbit</a></div>
+            <div class="col-md-4"><a href="#" class="btn btn-block btn-lg btn-default js-pan">Pan</a></div>
+            <div class="col-md-4"><h4>Zoom</h4><div id="slider"></div></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h3>Model</h3>
+            <div class="col-md-6"><a href="#" class="btn btn-lg btn-block btn-primary js-prev">Prev</a></div>
+            <div class="col-md-6"><a href="#" class="btn btn-lg btn-block btn-primary js-next">Next</a></div>
+          </div>
+        </div>
+      </div>
+
+	<div class="col-md-8">
+		<div class="row fillVertical" style="width:1000px; height:600px;">
+			<iframe src="https://lagoa.com/embed_links/580?validationHash=fTde_g_R1ek4_ejugkmGhw&width=500&height=330&fontcolor=&auto_load_scene=true&lagoa_logo=true" id="lagoaframe" width="500" height="330" frameborder="0" ></iframe>
+		</div>
+		<div class="row fillVertical">
+			<video autoplay="true" id="videoElement">
+
+			</video>
+			<canvas id="c" width="1000" height="1000">
+			
+			</canvas>
+		</div>		
+	</div>
+	<script>
+	window.onload = function() {
+      var video = document.getElementById('videoElement');
+      var canvas = document.getElementById('c');
+      var context = canvas.getContext('2d');
+
+      var tracker = new tracking.ObjectTracker('face');
+      tracker.setInitialScale(4);
+      tracker.setStepSize(2);
+      tracker.setEdgesDensity(0.1);
+
+      //tracking.track('#videoElement', tracker, { camera: true });
+
+      tracker.on('track', function(event) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        event.data.forEach(function(rect) {
+          context.strokeStyle = '#a64ceb';
+          context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+          context.font = '11px Helvetica';
+          context.fillStyle = "#fff";
+          context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+          context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+        });
+      });
+
+      /*var gui = new dat.GUI();
+      gui.add(tracker, 'edgesDensity', 0.1, 0.5).step(0.01);
+      gui.add(tracker, 'initialScale', 1.0, 10.0).step(0.1);
+      gui.add(tracker, 'stepSize', 1, 5).step(0.1);*/
+    };
+(function() {
+  var canvas = this.__canvas = new fabric.Canvas('c', {
+    hoverCursor: 'pointer',
+    selection: false
+  });
+
+  canvas.on({
+    'object:moving': function(e) {
+      e.target.opacity = 0.5;
+    },
+    'object:modified': function(e) {
+      e.target.opacity = 1;
+    }
+  });
+
+  //for (var i = 0, len = 15; i < len; i++) {
+	
+    fabric.Image.fromURL('img/shirt.png', function(img) {
+      img.set({
+        left: fabric.util.getRandomInt(0, 600),
+        top: fabric.util.getRandomInt(0, 500),
+        angle: fabric.util.getRandomInt(0, 0)
+      });
+
+      img.perPixelTargetFind = true;
+      img.targetFindTolerance = 4;
+      img.hasControls = img.hasBorders = false;
+
+      img.scale(fabric.util.getRandomInt(150, 150) / 100);
+		canvas.add(img);
+    });
+	
+  //}
+})();	
+
+  </script>
+<script>
+	
+	var video = document.querySelector("#videoElement");
+	 
+	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+	 
+	if (navigator.getUserMedia) {       
+		navigator.getUserMedia({video: true}, handleVideo, videoError);
+	}
+	 
+	function handleVideo(stream) {
+		video.src = window.URL.createObjectURL(stream);
+	}
+	 
+	function videoError(e) {
+		// do something
+	}
+</script>
+
+    </div>
+  </div>
+
+  <script>
+    // some constants
+    var ONE_OVER_255 = 1/255;
+    var EXPORT_TAG = "export";
+
+    var FPS = 24;
+    var ANIM_MAX_FRAMES = 30;
+    var RENDER_WIDTH = 512;
+
+    var exportMeshes = [];  //lapi.SceneObject array
+    var currentMesh = 0;    // keep track of the object we are looking at.
+
+    // TODO COG to the property set... here we just account for offset
+    var offset = { x: -45, y: -9, z: 0 };
+
+    var cam, camPos, targetPos;
+
+    // linear interpolation for the animation stuff
+    function lerp( a, b, d ){
+      return a + d * (b - a);
+    }
+
+    // setup the camera animation and play
+    function playCameraInterpolation( aCamVector, bCamVector, aTargetVector, bTargetVector ){
+
+      // animation length in frames
+      var currFrame = 0;
+
+      // setup our frame update routine
+      lapi.stepCb = function( e ){
+
+        currFrame++;
+
+        var dt = currFrame/ANIM_MAX_FRAMES;
+
+        // we are only inrerested in X changes...
+        camPos.x.value = lerp(aCamVector.x, bCamVector.x, dt);
+        targetPos.x.value = lerp(aTargetVector.x, bCamVector.x, dt);
+
+
+
+//        console.log("interpolating", lerp(aCamVector.x, bCamVector.x, dt), "frame", currFrame, dt);
+
+        if(camPos.x.value === bCamVector.x || currFrame >= ANIM_MAX_FRAMES ){
+          lapi.stop();
+          console.log("stop");
+        }
+      };
+
+      // play the animation
+      lapi.play(FPS);
+    }
+
+    var nextMesh = function(){
+
+      if( currentMesh < exportMeshes.length-1 ){
+        ++currentMesh;
+
+        // get a vector to camera's actual position
+        var currentCameraPos = { x : camPos.x.value, y : camPos.y.value, z : camPos.z.value };
+        var currentTargetPos = { x : targetPos.x.value, y : targetPos.y.value, z : targetPos.z.value };
+
+        var posParams = exportMeshes[currentMesh].getProperty("Position").parameters;
+        var newCamPos = { x : posParams.x.value-offset.x,
+                          y : posParams.y.value-offset.y,
+                          z : posParams.z.value-offset.z };
+
+
+        console.log( currentCameraPos, newCamPos );
+
+        playCameraInterpolation( currentCameraPos, newCamPos,
+                                 currentTargetPos, newCamPos );
+      }
+      console.log("next", currentMesh);
+    }
+
+    function prevMesh(){
+      if( currentMesh >= 1 ){
+        --currentMesh;
+
+        // get a vector to camera's actual position
+        var currentCameraPos = { x : camPos.x.value, y : camPos.y.value, z : camPos.z.value };
+        var currentTargetPos = { x : targetPos.x.value, y : targetPos.y.value, z : targetPos.z.value };
+
+        var posParams = exportMeshes[currentMesh].getProperty("Position").parameters;
+        var newCamPos = { x : posParams.x.value-offset.x,
+          y : posParams.y.value-offset.y,
+          z : posParams.z.value-offset.z };
+
+
+        console.log( currentCameraPos, newCamPos );
+
+        playCameraInterpolation( currentCameraPos, newCamPos,
+          currentTargetPos, newCamPos );
+      }
+      console.log("prev", currentMesh);
+    }
+
+    // setup some UI stuff
+    var cPicker = $('select[name="color-picker1"]').simplecolorpicker();
+
+    var uiElement = $('select[name="color-picker1"]');
+    uiElement.change(function(){
+
+      console.log("Color change");
+
+      // read the color form the UI element
+      var color = lapi.utils.hexToRGB( cPicker.val() );
+
+      // this will return an array with all objects that have the part name, in Lagoa multiple parts
+      // can have the same name – no "name uniqueness" only object GUID uniqueness is guaranteed.
+      // we will make an assumption that we are only interested in the first one, therefore the array [0]
+      var mat = exportMeshes[currentMesh].getMaterial();
+
+      // we are interested in changing the reflectance property
+      // for Velvet shader the color is called "color..."
+      var reflectance = mat.properties.getProperty("color");
+
+      // pow 2 is just for gamma correction
+      reflectance.parameters.f0.value   = Math.pow( color.r * ONE_OVER_255, 2 );
+      reflectance.parameters.f1.value = Math.pow( color.g * ONE_OVER_255, 2 );
+      reflectance.parameters.f2.value  = Math.pow( color.b * ONE_OVER_255, 2 );
+    });
+
+    // add some buttons
+    $('.js-orbit').bind( "click", function(){
+      lapi.orbitTool();
+    });
+
+
+    $('.js-pan').bind( "click", function(){
+      lapi.panTool();
+    });
+
+
+    $('.js-next').bind( "click", function(){
+      nextMesh();
+    });
+
+    $('.js-prev').bind( "click", function(){
+      prevMesh()
+    });
+
+
+    function setOnClickPattern( in_htmlElement, in_clickValue ){
+      $(in_htmlElement).click(function(e){
+        // grab the parameter that the element will handle
+        var mat = exportMeshes[currentMesh].getMaterial();
+        var param = mat.getProperty("color").parameters.texture;
+        param.value = in_clickValue;
+      })
+    }
+
+    function addPatterns(){
+      // our patterns
+      var scn = lapi.getActiveScene()
+      var textures = scn.getTextures();
+
+      // scrape all textures that start with "EXPORT_TAG".
+      var tmpTexture = null;
+      var textureName = "";
+      var isExport = false;
+
+      // expose all textures
+      for( var i=0 ;i<textures.length; ++i){
+        tmpTexture = textures[i];
+        textureName = tmpTexture.properties.getParameter('name').value;
+        isExport = textureName.indexOf(EXPORT_TAG);
+        if(isExport >= 0){
+
+          // create the HTML element
+          var imgUrl = tmpTexture.getProperty("url").getParameter('url').value;
+          var img = $(document.createElement('img'));
+
+          // assign the callback
+          setOnClickPattern( img, tmpTexture.properties.getParameter('guid').value );
+
+          img.attr('src', imgUrl );
+          img.appendTo('#patterns');
+        }
+      }
+
+    }
+
+    function getAllExportMeshes(in_scene){
+
+      var meshes = in_scene.getMeshes();
+      var meshName = "";
+      var countMeshes = meshes.length;
+      var countExported = 0;
+
+      // yes, we will just sort this by name
+      var meshesToExport = {};
+      var sortList = [];
+      var i;
+		
+      for (i=0; i<countMeshes; i++){
+        meshName = meshes[i].properties.getParameter("name").value;
+        if(meshName.indexOf(EXPORT_TAG)>=0){
+          sortList.push(meshName);
+          meshesToExport[meshName] = meshes[i];
+        }
+      }
+		
+      sortList.sort();
+      countExported = sortList.length;
+
+      for(i=0; i<countExported; i++){
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        exportMeshes[i] = meshesToExport[sortList[i]];
+      }
+
+    }
+
+    // start rendering and hide meshes
+    function beginRendering(in_scn){
+
+      // this timeout just prevents us from racing... avoid a bug. Just trust me.
+      setTimeout( function(){
+        // now we will set all the GL meshes to not visible
+        var meshes = in_scn.getMeshes();
+        for( var m in meshes ){
+          meshes[m].getProperty("Visibility").getParameter("visible").value = false;
+        }
+        // start rendering
+        lapi.startRender()
+      }, 2000 );
+    }
+
+    // lens zoom slider
+    function refreshSlider(e, nr){
+      var cam = lapi.getCamera();
+      cam.properties.getProperty("Lens").getParameter("zoom").value = nr.value;
+    }
+
+    $( "#slider" ).slider( { orientation: "horizontal",
+    range: "min",
+    min : 15,
+    max: 100,
+    value: 15,
+    slide: refreshSlider,
+    change: refreshSlider });
+
+    $(document).ready(function() {
+
+      // called once the scene is fully loaded – warning: geometry might not be present!
+      
+	  lapi.onSceneLoaded = function(){
+
+        // set some defaults
+        var scn = lapi.getActiveScene();
+        cam = scn.getCameras()[0];
+        cam.getProperty("Lens").getParameter("dofradius").value = 0;
+        cam.getProperty("Resolution").getParameter("width").value = RENDER_WIDTH;
+
+        // get all shirts
+        getAllExportMeshes(scn);
+
+        // build our app UI
+        addPatterns();
+
+        // we will keep track of camera for animation
+        camPos = cam.getProperty("Position").parameters;
+        targetPos = cam.getProperty("TargetPosition").parameters;
+
+        beginRendering(scn);
+
+        // make sure nothing is selected
+        lapi.desselectAll();
+      };
+		
+    });
+
+  </script>
+
+  </body>
+</html>

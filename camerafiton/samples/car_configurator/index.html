@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Car Configurator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="../assets/Flat-UI-master/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="../assets/Flat-UI-master/css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../assets/Flat-UI-master/images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="../assets/Flat-UI-master/js/html5shiv.js"></script>
+    <![endif]-->
+
+  <!-- Load JS here for greater good =============================-->
+  <script src="../assets/Flat-UI-master/js/jquery-1.8.3.min.js"></script>
+  <script src="../assets/Flat-UI-master/js/jquery-ui-1.10.3.custom.min.js"></script>
+  <script src="../assets/Flat-UI-master/js/jquery.ui.touch-punch.min.js"></script>
+  <script src="../assets/Flat-UI-master/js/bootstrap.min.js"></script>
+  <script src="../assets/Flat-UI-master/js/bootstrap-select.js"></script>
+  <script src="../assets/Flat-UI-master/js/bootstrap-switch.js"></script>
+  <script src="../assets/Flat-UI-master/js/flatui-checkbox.js"></script>
+  <script src="../assets/Flat-UI-master/js/flatui-radio.js"></script>
+  <script src="../assets/Flat-UI-master/js/jquery.tagsinput.js"></script>
+  <script src="../assets/Flat-UI-master/js/jquery.placeholder.js"></script>
+
+  <!-- color picker -->
+  <link rel="stylesheet" type="text/css" href="../assets/jquery.simplecolorpicker.css"/>
+  <script src="../assets/jquery.simplecolorpicker.js"></script>
+
+
+    <!-- Bootstrap -->
+  <!-- Latest compiled and minified CSS -->
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
+
+  <!-- Latest Glyphicons minified CSS -->
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+  <!-- LAGOA API -->
+  <script src="../../build/lapi.js"></script>
+
+  <style media="screen">
+    body {
+      background: whitesmoke;
+    }
+
+    #patterns img{
+      width : 50px;
+      height: 50px;
+      margin: 2px;
+      border-radius: 8px;
+    }
+
+    #patterns img:hover{
+      /*width: 100px;*/
+      /*height: 100px;*/
+      outline : 4px solid #ffff00;
+      border-radius: 8px;
+    }
+
+    .fillVertical{
+      height:700px;
+    }
+    .fillHeader{
+      width:100%;
+      height:500px;
+    }
+    .fillHeader iframe{
+      float : right;
+      width : 100%;
+      height: 100%;
+    }
+
+  </style>
+
+  </head>
+
+<body>
+<div class="bs-header fillHeader" id="content">
+  <iframe src="https://lagoa.com/embed_links/1132?validationHash=8CY8JKLxSEpSFCIQN_5UUcVFpOiNdg&width=500&height=330&auto_load_scene=true&asset_name=true&lagoa_logo=true" id="lagoaframe" width="500" height="330" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="row">
+          <div class="col-md-12"><p>View controls</p></div>
+          <div id="slider"></div>
+        </div>
+        <div class="row">
+          <div class="col-md-4"><a class="btn btn-block btn-lg btn-primary js-view-0">A</a></div>
+          <div class="col-md-4"><a class="btn btn-block btn-lg btn-primary js-view-1">B</a></div>
+          <div class="col-md-4"><a class="btn btn-block btn-lg btn-primary js-view-2">C</a></div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-6"><a class="btn btn-block btn-sm btn-default js-orbit">Rotate tool</a></div>
+          <div class="col-md-6"><a class="btn btn-block btn-sm btn-default js-pan">Pan tool</a></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="col-md-12">
+          <p>Light</p>
+          <div id="intensity-slider"></div>
+          <div id="intensity-slider2"></div>
+          <div id="patterns"></div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <!--<p>Pattern</p>-->
+        <!--<div id="patterns"></div>-->
+        <!--<div class="col-md-12">-->
+        <p>Paint</p>
+          <div class="col-md-2"><a class="btn btn-block btn-lg btn-default js-color-black" style="background-color:black;"></a></div>
+          <div class="col-md-2"><a class="btn btn-block btn-lg btn-default js-color-gray" style="background-color:darkgray;"></a></div>
+          <div class="col-md-2"><a class="btn btn-block btn-lg btn-default js-color-red" style="background-color:darkred;"></a></div>
+          <div class="col-md-2"><a class="btn btn-block btn-lg btn-default js-color-white" style="background-color:lightgray;"></a></div>
+          <div class="col-md-2"><a class="btn btn-block btn-lg btn-default js-color-blue" style="background-color:lightblue;"></a></div>
+
+        <!--<select name="color-picker1">-->
+          <!--<option value="#7bd148">Green</option>-->
+          <!--<option value="#5484ed">Bold blue</option>-->
+          <!--<option value="#222222">Black</option>-->
+          <!--<option value="#46d6db">Turquoise</option>-->
+          <!--<option value="#51b749">Bold green</option>-->
+          <!--<option value="#ffb878">Orange</option>-->
+          <!--<option value="#dc2127">Bold red</option>-->
+          <!--<option value="#e1e1e1">Gray</option>-->
+        <!--</select>-->
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // some constants
+    var DOME_LIGHT_NAME = "Dome Light";
+    var SPHERE_LIGHT_NAME = "interior";
+
+    var ONE_OVER_255 = 1/255;
+    var EXPORT_TAG = "export";
+
+    var FPS = 10;
+    var ANIM_MAX_FRAMES = 30;
+    var RENDER_WIDTH = 960;
+
+    var exportMeshes = [];  //lapi.SceneObject array
+    var currentMesh = 0;    // keep track of the object we are looking at.
+
+    // TODO COG to the property set... here we just account for offset
+    var offset = { x: -45, y: -9, z: 0 };
+
+
+    // hard coded view presets
+    var camPresets = [
+
+      { Position : { x : -150, y : 25, z: 410 },
+        TargetPosition : { x : 0, y : 14, z : 14 },
+        // Lens   : { zoom : 100, focallength: 70, dofradius : 0.12, bladeCnt : 5 }
+        Lens   : { zoom : 14, focallength: 1, dofradius : 0.0, bladeCnt : 6 }
+      },
+
+      { Position : { x : -106, y : 21, z: 155},
+        TargetPosition : { x : -18, y : 8, z : 28 },
+        Lens   : { zoom : 20, focallength: 17.2, dofradius :0.5, bladeCnt : 6 }
+      },
+
+      { Position : { x : 80, y : 21, z: -165.0 },
+        TargetPosition : { x : -18, y : 8, z : 28 },
+        Lens   : { zoom : 20, focallength: 16.6, dofradius :1, bladeCnt : 6 }
+      }
+
+    ];
+
+
+    var cam, camPos, targetPos;
+
+    // linear interpolation for the animation stuff
+    function lerp( a, b, d ){
+      return a + d * (b - a);
+    }
+
+    function setCamera( in_camPreset ){
+
+      console.log( "setCamera()", in_camPreset );
+
+      var cam = lapi.getCamera();
+      var camGuid = cam.properties.parameters.guid.value;
+
+      for( var prop in in_camPreset ){
+        lapi.setObjectParameter( camGuid, prop, in_camPreset[prop] );
+      }
+
+      // also update the HTML elements.
+      // updateCameraUIControls( in_camPreset );
+    }
+
+    // setup the camera animation and play
+    function playCameraInterpolation( aCamVector, bCamVector, aTargetVector, bTargetVector ){
+
+      // set the res to very low
+//      cam.getProperty("Resolution").getParameter("Width").value = 512;
+
+      // animation length in frames
+      var currFrame = 0;
+
+      // setup our frame update routine
+      lapi.stepCb = function( e ){
+
+        currFrame++;
+
+        var dt = currFrame/ANIM_MAX_FRAMES;
+
+        // we are only inrerested in X changes...
+        camPos.x.value = lerp(aCamVector.x, bCamVector.x, dt);
+        targetPos.x.value = lerp(aTargetVector.x, bCamVector.x, dt);
+
+        console.log("interpolating", lerp(aCamVector.x, bCamVector.x, dt), "frame", currFrame, dt);
+
+        if(camPos.x.value === bCamVector.x || currFrame >= ANIM_MAX_FRAMES ){
+//          cam.getProperty("Resolution").getParameter("Width").value = 512;
+          lapi.stop();
+          console.log("stop");
+        }
+      };
+
+      // play the animation
+      lapi.play(FPS);
+    }
+
+    var nextMesh = function(){
+
+      if( currentMesh < exportMeshes.length-1 ){
+        ++currentMesh;
+
+        // get a vector to camera's actual position
+        var currentCameraPos = { x : camPos.x.value, y : camPos.y.value, z : camPos.z.value };
+        var currentTargetPos = { x : targetPos.x.value, y : targetPos.y.value, z : targetPos.z.value };
+
+        var posParams = exportMeshes[currentMesh].getProperty("Position").parameters;
+        var newCamPos = { x : posParams.x.value-offset.x,
+                          y : posParams.y.value-offset.y,
+                          z : posParams.z.value-offset.z };
+
+
+        console.log( currentCameraPos, newCamPos );
+
+        playCameraInterpolation( currentCameraPos, newCamPos,
+                                 currentTargetPos, newCamPos );
+      }
+      console.log("next", currentMesh);
+    }
+
+    function prevMesh(){
+      if( currentMesh >= 1 ){
+        --currentMesh;
+
+        // get a vector to camera's actual position
+        var currentCameraPos = { x : camPos.x.value, y : camPos.y.value, z : camPos.z.value };
+        var currentTargetPos = { x : targetPos.x.value, y : targetPos.y.value, z : targetPos.z.value };
+
+        var posParams = exportMeshes[currentMesh].getProperty("Position").parameters;
+        var newCamPos = { x : posParams.x.value-offset.x,
+          y : posParams.y.value-offset.y,
+          z : posParams.z.value-offset.z };
+
+
+        console.log( currentCameraPos, newCamPos );
+
+        playCameraInterpolation( currentCameraPos, newCamPos,
+          currentTargetPos, newCamPos );
+      }
+      console.log("prev", currentMesh);
+    }
+
+    // setup some UI stuff
+    var cPicker = $('select[name="color-picker1"]').simplecolorpicker();
+
+    var uiElement = $('select[name="color-picker1"]');
+    uiElement.change(function(){
+
+      console.log("Color change");
+
+      // read the color form the UI element
+      var color = lapi.utils.hexToRGB( cPicker.val() );
+
+      // this will return an array with all objects that have the part name, in Lagoa multiple parts
+      // can have the same name – no "name uniqueness" only object GUID uniqueness is guaranteed.
+      // we will make an assumption that we are only interested in the first one, therefore the array [0]
+      var mat = exportMeshes[currentMesh].getMaterial();
+
+      // we are interested in changing the reflectance property
+      // for Velvet shader the color is called "color..."
+      var reflectance = mat.properties.getProperty("color");
+
+      // pow 2 is just for gamma correction
+      reflectance.parameters.red.value   = Math.pow( color.r * ONE_OVER_255, 2 );
+      reflectance.parameters.green.value = Math.pow( color.g * ONE_OVER_255, 2 );
+      reflectance.parameters.blue.value  = Math.pow( color.b * ONE_OVER_255, 2 );
+    });
+
+    // hook the buttons
+    $('.js-color-black').bind( "click", function(){
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Black", "bodywork");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Black", "bodywork1");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Black", "bodywork2");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Black", "bodywork3");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Black", "bodywork4");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Black", "bodywork5");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Black", "bodywork6");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Black", "bodywork7");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Black", "bodywork8");
+    });
+
+    $('.js-view-0').bind( "click", function(){
+
+      setCamera(camPresets[0]);
+
+    });
+
+    $('.js-view-1').bind( "click", function(){
+
+      setCamera(camPresets[1]);
+
+    });
+
+    $('.js-view-2').bind( "click", function(){
+
+      setCamera(camPresets[2]);
+
+    });
+
+    $('.js-color-white').bind( "click", function(){
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint White", "bodywork");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint White", "bodywork1");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint White", "bodywork2");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint White", "bodywork3");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint White", "bodywork4");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint White", "bodywork5");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint White", "bodywork6");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint White", "bodywork7");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint White", "bodywork8");
+    });
+
+    $('.js-color-blue').bind( "click", function(){
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Blue", "bodywork");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Blue", "bodywork1");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Blue", "bodywork2");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Blue", "bodywork3");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Blue", "bodywork4");    
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Blue", "bodywork5");    
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Blue", "bodywork6");    
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Blue", "bodywork7");    
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Blue", "bodywork8");    
+    });
+
+    $('.js-color-red').bind( "click", function(){
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Red", "bodywork");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Red", "bodywork1");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Red", "bodywork2");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Red", "bodywork3");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Red", "bodywork4");    
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Red", "bodywork5");    
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Red", "bodywork6");    
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Red", "bodywork7");    
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Red", "bodywork8");    
+    });
+
+    $('.js-color-gray').bind( "click", function(){
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Grey", "bodywork");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Grey", "bodywork1");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Grey", "bodywork2");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Grey", "bodywork3");
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Grey", "bodywork4");      
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Grey", "bodywork6");      
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Grey", "bodywork7");      
+      lapi.applyMaterialToMeshByName( "Realistic Carpaint Grey", "bodywork8");      
+    });
+
+    $('.js-orbit').bind( "click", function(){
+      lapi.orbitTool();
+    });
+
+
+    $('.js-pan').bind( "click", function(){
+      lapi.panTool();
+    });
+
+
+    $('.js-next').bind( "click", function(){
+      nextMesh();
+    });
+
+    $('.js-prev').bind( "click", function(){
+      prevMesh()
+    });
+
+    function setOnClickPattern( in_htmlElement, in_clickValue ){
+      $(in_htmlElement).click(function(e){
+        // grab the parameter that the element will handle
+        var mat = lapi.getActiveScene().getObjectByName(DOME_LIGHT_NAME)[0];
+        var param = mat.getProperty("EnvironmentMap").parameters.path;
+        param.value = in_clickValue;
+      })
+    }
+
+    function addPatterns(){
+      // our patterns
+      var scn = lapi.getActiveScene()
+      var textures = scn.getTextures();
+
+      // scrape all textures that start with "EXPORT_TAG".
+      var tmpTexture = null;
+      var textureName = "";
+      var isExport = false;
+
+      // expose all textures
+      for( var i=0 ;i<textures.length; ++i){
+        tmpTexture = textures[i];
+        textureName = tmpTexture.properties.getParameter("name").value;
+        isExport = textureName.indexOf(EXPORT_TAG);
+        if(isExport >= 0){
+
+          // create the HTML element
+          var imgUrl = tmpTexture.getProperty("url").getParameter("url").value;
+          var img = $(document.createElement('img'));
+
+          // assign the callback
+          setOnClickPattern( img, tmpTexture.properties.getParameter("guid").value );
+
+          img.attr('src', imgUrl );
+          img.appendTo('#patterns');
+        }
+      }
+
+    }
+
+    function getAllExportMeshes(in_scene){
+
+      var meshes = in_scene.getMeshes();
+      var meshName = "";
+      var count = meshes.length;
+
+      var sortedMeshNames = [];
+
+      for (var i =0; i<count; i++){
+        meshName = meshes[i].properties.getParameter("name").value;
+        if(meshName.indexOf(EXPORT_TAG)>=0){
+          sortedMeshNames.push(meshName);
+        }
+      }
+
+      // little sorting so we get the named order
+      sortedMeshNames.sort();
+
+      for( var i=0; i<sortedMeshNames.length; i++){
+        exportMeshes.push(meshes[i]);
+      }
+    }
+
+    function updateZoomSlider(e){
+      $( "#slider" ).slider('value', e.zoom.value);
+    }
+
+    function bindProperties(){
+      cam.bindProperty("Lens", updateZoomSlider);
+    }
+
+    // start rendering and hide meshes
+    function beginRendering(in_scn){
+
+      // this timeout just prevents us from racing... avoid a bug.s Just trust me.
+      setTimeout( function(){
+        // now we will set all the GL meshes to not visible
+        var meshes = in_scn.getMeshes();
+        for( var m in meshes ){
+          meshes[m].getProperty("Visibility").parameters.visible.value = false;
+        }
+        // start rendering
+        lapi.startRender()
+      }, 10000 );
+    }
+
+    // light sliders
+    function refreshIntensitySlider(e, nr){
+      var obj = lapi.getActiveScene().getObjectByName(DOME_LIGHT_NAME)[0];
+
+      var val = nr.value / 10;
+
+      var params = { r : val,
+                     g : val,
+                     b : val };
+
+      lapi.setObjectParameter( obj.properties.parameters.guid.value, "Color", params );
+
+    }
+
+    function refreshIntensitySlider2(e, nr){
+      var obj = lapi.getActiveScene().getObjectByName(DOME_LIGHT_NAME)[0];
+
+      lapi.setObjectParameter( obj.properties.parameters.guid.value, "Rotation", { angley : nr.value } );
+
+    }
+
+    // lens zoom slider
+    function refreshSlider(e, nr){
+      var cam = lapi.getCamera();
+      cam.properties.getProperty("Lens").parameters.zoom.value = nr.value;
+    }
+
+    // lens dof slider
+    function refreshSliderDof(e, nr){
+      var cam = lapi.getCamera();
+      cam.properties.getProperty("Lens").getParameter("Depth of field radius").value = nr.value;
+    }
+
+    $( "#intensity-slider2" ).slider( { orientation: "horizontal",
+      range: "min",
+      min : -180,
+      max: 180,
+      value: 20,
+      slide : refreshIntensitySlider2,
+      onSlide: refreshIntensitySlider2 });
+
+    $( "#intensity-slider" ).slider( { orientation: "horizontal",
+      range: "min",
+      min : 0,
+      max: 20,
+      value: 2,
+      slide : refreshIntensitySlider,
+      onSlide: refreshIntensitySlider });
+
+    $( "#slider" ).slider( { orientation: "horizontal",
+      range: "min",
+      min : 6,
+      max: 100,
+      value: 14,
+      slide : refreshSlider,
+      onSlide: refreshSlider });
+
+//    $( "#sliderDof" ).slider( { orientation: "horizontal",
+//      range: "min",
+//      min : 0,
+//      max: 100,
+//      value: 0,
+//      slide: refreshSlider,
+//      change: refreshSlider });
+
+    $(document).ready(function() {
+
+      // called once the scene is fully loaded – warning: geometry might not be present!
+      lapi.onSceneLoaded = function(){
+
+        // set some defaults
+        var scn = lapi.getActiveScene();
+        cam = scn.getCameras()[0];
+        cam.getProperty("Lens").getParameter("dofradius").value = 0;
+        cam.getProperty("Resolution").getParameter("width").value = RENDER_WIDTH;
+
+        // get all shirts
+        getAllExportMeshes(scn);
+
+        // build our app UI
+        addPatterns();
+
+        // we will keep track of camera for animation
+        camPos = cam.getProperty("Position").parameters;
+        targetPos = cam.getProperty("TargetPosition").parameters;
+
+        setCamera(camPresets[0]);
+
+        beginRendering(scn);
+
+        bindProperties();
+
+        // make sure nothing is selected
+        lapi.desselectAll();
+      };
+
+    });
+
+  </script>
+
+  </body>
+</html>
